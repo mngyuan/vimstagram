@@ -1,0 +1,19 @@
+{
+  "name": "vimstagram",
+  "version": "0.0.1",
+  "description": "Vim style navigation for instagram.com",
+  "main": "src/vimstagram.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phorust/vimstagram.git"
+  },
+  "author": "Kevin Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phorust/vimstagram/issues"
+  },
+  "homepage": "https://github.com/phorust/vimstagram#readme"
+}
