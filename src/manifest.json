@@ -1,0 +1,16 @@
+{
+	"manifest_version": 2,
+	"name": "vimstagram",
+	"version": "0.1",
+	"description": "Vim style JK navigation for instagram.com",
+	"icons": {
+		"128": "icon128.png"
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["*://www.instagram.com/"],
+      "js": ["jquery.js", "vimstagram.js"]
+		}
+	]
+}
