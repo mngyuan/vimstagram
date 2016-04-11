@@ -11,6 +11,11 @@
 		{
 			"matches": ["*://www.instagram.com/"],
       "js": ["jquery.js", "vimstagram.js"]
+		},
+		{
+			"matches": ["*://www.instagram.com/explore/*"],
+			"js": ["jquery.js", "grid.js"],
+			"css": ["grid.css"]
 		}
 	]
 }
