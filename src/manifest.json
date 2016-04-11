@@ -16,6 +16,10 @@
 			"matches": ["*://www.instagram.com/explore/*"],
 			"js": ["jquery.js", "grid.js"],
 			"css": ["grid.css"]
+		},
+		{
+			"matches": ["*://www.instagram.com/p/*"],
+			"js": ["jquery.js", "photo.js"]
 		}
 	]
 }

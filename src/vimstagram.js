@@ -50,7 +50,7 @@ $(document).ready(function() {
     }
   });
 
-  $("input[placeholder='Add a comment…']").on('keydown', function(e) {
+  $("body").on('keydown', function(e) {
     if (e.keyCode === 27) {
       // ESC, to leave a comment box
       $("input[placeholder='Add a comment…']")[lastImage].blur();
