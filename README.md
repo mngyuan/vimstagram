@@ -4,7 +4,7 @@ vim style navigation for instagram. The core commands:
 
 ```
 J - next
-K - last
+K - prev
 L - like
 ```
 
