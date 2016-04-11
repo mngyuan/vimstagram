@@ -39,14 +39,21 @@ $(document).ready(function() {
     } else if (e.keyCode === 118) {
       if (lastImage == -1) { return; }
       // V, view all comments
-      $('article').eq(0).find('button').not('.coreSpriteEllipsis').click();
+      $('article').eq(lastImage).find('button').not('.coreSpriteEllipsis').click();
     } else if (e.keyCode === 114) {
       if (lastImage == -1) { return; }
       // R, report or embed
-      $('article').eq(0).find('button.coreSpriteEllipsis').click();
+      $('article').eq(lastImage).find('button.coreSpriteEllipsis').click();
     } else if (e.keyCode === 117) {
       // U, undo (comment)
-      $('article').eq(0).find('button[title="Delete Comment"]').last().click();
+      $('article').eq(lastImage).find('button[title="Delete Comment"]').last().click();
+    }
+  });
+
+  $("input[placeholder='Add a comment…']").on('keydown', function(e) {
+    if (e.keyCode === 27) {
+      // ESC, to leave a comment box
+      $("input[placeholder='Add a comment…']")[lastImage].blur();
     }
   });
 });
