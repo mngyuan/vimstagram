@@ -1,6 +1,6 @@
 {
   "name": "vimstagram",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Vim style navigation for instagram.com",
   "main": "src/vimstagram.js",
   "scripts": {
