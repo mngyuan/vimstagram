@@ -23,7 +23,8 @@ $(document).ready(function() {
         scrollTop: $('article').eq(lastImage).offset().top - 50
       }, 100);
     } else if (e.keyCode === 76) {
-      // TODO: L, like
+      // L, like
+      $('.coreSpriteHeartOpen, .coreSpriteHeartFull')[lastImage].click();
     }
   });
 });
