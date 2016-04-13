@@ -1,5 +1,11 @@
 var lastImage = -1;
 
+function goToPost(i) {
+  $('body').animate({
+    scrollTop: $('article').eq(i).offset().top - 50
+  }, 100);
+}
+
 $(document).ready(function() {
   $('body').on('keypress', function(e) {
     if (e.target.tagName.toLowerCase() === 'input' ||
@@ -17,20 +23,20 @@ $(document).ready(function() {
           scrollTop: $(document).height()
         }, 100);
       } else {
-        $(this).animate({
-          scrollTop: $('article').eq(lastImage).offset().top - 50
-        }, 100);
+        goToPost(lastImage);
       }
     } else if (e.keyCode === 107) {
       // K
       lastImage = Math.max(lastImage - 1, 0);
-      $(this).animate({
-        scrollTop: $('article').eq(lastImage).offset().top - 50
-      }, 100);
+      goToPost(lastImage);
     } else if (e.keyCode === 108) {
       // L, like
       if (lastImage == -1) { return; }
       $('.coreSpriteHeartOpen, .coreSpriteHeartFull')[lastImage].click();
+    } else if (e.keyCode === 115) {
+      // S, search
+      $("input[placeholder='Search']").focus();
+      e.preventDefault();
     } else if (e.keyCode === 99) {
       if (lastImage == -1) { return; }
       // C, comment
@@ -52,8 +58,13 @@ $(document).ready(function() {
 
   $("body").on('keydown', function(e) {
     if (e.keyCode === 27) {
-      // ESC, to leave a comment box
-      $("input[placeholder='Add a comment…']")[lastImage].blur();
+      // ESC, to leave a comment box or search box
+      if ($("input[placeholder='Search']").is(':focus')) {
+        $("input[placeholder='Search']").blur();
+        goToPost(lastImage);
+      } else {
+        $("input[placeholder='Add a comment…']")[lastImage].blur();
+      }
     }
   });
 });

@@ -13,7 +13,7 @@
       "js": ["jquery.js", "vimstagram.js"]
 		},
 		{
-			"matches": ["*://www.instagram.com/explore/*"],
+			"matches": ["*://www.instagram.com/explore/tags/*"],
 			"js": ["jquery.js", "grid.js"],
 			"css": ["grid.css"]
 		},
