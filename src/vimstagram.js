@@ -1,70 +1,65 @@
-var lastImage = -1;
-
-function goToPost(i) {
-  $('body').animate({
-    scrollTop: $('article').eq(i).offset().top - 50
-  }, 100);
-}
+var mode = "feed";
 
 $(document).ready(function() {
   $('body').on('keypress', function(e) {
-    if (e.target.tagName.toLowerCase() === 'input' ||
-        e.target.tagName.toLowerCase() === 'textarea') {
-      return;
-    }
-
-    if (e.keyCode === 106) {
-      // J
-      lastImage++;
-      if (lastImage === $('article').length) {
-        // if need to load more scroll to bottom
-        lastImage--;
-        $(this).animate({
-          scrollTop: $(document).height()
-        }, 100);
-      } else {
-        goToPost(lastImage);
-      }
-    } else if (e.keyCode === 107) {
-      // K
-      lastImage = Math.max(lastImage - 1, 0);
-      goToPost(lastImage);
-    } else if (e.keyCode === 108) {
-      // L, like
-      if (lastImage == -1) { return; }
-      $('.coreSpriteHeartOpen, .coreSpriteHeartFull')[lastImage].click();
-    } else if (e.keyCode === 115) {
-      // S, search
-      $("input[placeholder='Search']").focus();
-      e.preventDefault();
-    } else if (e.keyCode === 99) {
-      if (lastImage == -1) { return; }
-      // C, comment
-      $("input[placeholder='Add a comment…']")[lastImage].focus();
-      e.preventDefault();
-    } else if (e.keyCode === 118) {
-      if (lastImage == -1) { return; }
-      // V, view all comments
-      $('article').eq(lastImage).find('button').not('.coreSpriteEllipsis').click();
-    } else if (e.keyCode === 114) {
-      if (lastImage == -1) { return; }
-      // R, report or embed
-      $('article').eq(lastImage).find('button.coreSpriteEllipsis').click();
-    } else if (e.keyCode === 117) {
-      // U, undo (comment)
-      $('article').eq(lastImage).find('button[title="Delete Comment"]').last().click();
+    switch (mode) {
+      case "feed":
+        handleKeypressFeed(e);
+        break;
+      case "photo":
+        handleKeypressPhoto(e);
+        break;
+      case "grid":
+        handleKeypressGrid(e);
+        break;
+      case "explore":
+        handleKeypressExplore(e);
+        break;
+      default:
+        console.error('mode was invalid');
+        break;
     }
   });
 
   $("body").on('keydown', function(e) {
-    if (e.keyCode === 27) {
-      // ESC, to leave a comment box or search box
-      if ($("input[placeholder='Search']").is(':focus')) {
-        $("input[placeholder='Search']").blur();
-        goToPost(lastImage);
-      } else {
-        $("input[placeholder='Add a comment…']")[lastImage].blur();
-      }
+    switch (mode) {
+      case "feed":
+        handleKeydownFeed(e);
+        break;
+      case "photo":
+        handleKeydownPhoto(e);
+        break;
+      case "grid":
+        handleKeydownGrid(e);
+        break;
+      case "explore":
+        handleKeydownExplore(e);
+        break;
+      default:
+        console.error('mode was invalid');
+        break;
     }
   });
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResp) {
+  // none of these regex escape . because i want to read
+  console.log(request.data.url);
+  if (request.data.url.match("https?://www.instagram.com/explore/tags/.*")) {
+    console.log('exploring a tag');
+    mode = "grid";
+  } else if (request.data.url.match("https?://www.instagram.com/explore/?")) {
+    console.log('explore');
+    mode = "explore";
+  } else if (request.data.url.match("https?://www.instagram.com/p/.*")) {
+    console.log('viewing a photo');
+    mode = "photo";
+  } else if (request.data.url.match("https?://www.instagram.com/..*/?")) {
+    // might be a better regex
+    console.log('viewing a profile');
+    mode = "grid";
+  } else {
+    console.log('on the feed');
+    mode = "feed";
+  }
 });

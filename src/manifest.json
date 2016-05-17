@@ -7,19 +7,18 @@
 		"128": "icon128.png"
 	},
 
+	"background": {
+		"persistent": true,
+		"page": "background.html"
+	},
 	"content_scripts": [
 		{
-			"matches": ["*://www.instagram.com/"],
-      "js": ["jquery.js", "vimstagram.js"]
-		},
-		{
-			"matches": ["*://www.instagram.com/explore/tags/*"],
-			"js": ["jquery.js", "grid.js"],
+			"matches": ["*://www.instagram.com/*"],
+      "js": ["jquery.js", "vimstagram.js", "feed.js", "grid.js", "photo.js"],
 			"css": ["grid.css"]
-		},
-		{
-			"matches": ["*://www.instagram.com/p/*"],
-			"js": ["jquery.js", "photo.js"]
 		}
+	],
+	"permissions": [
+		"tabs", "*://www.instagram.com/*"
 	]
 }
