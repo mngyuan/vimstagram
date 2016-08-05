@@ -14,7 +14,8 @@
 	"content_scripts": [
 		{
 			"matches": ["*://www.instagram.com/*"],
-      "js": ["jquery.js", "vimstagram.js", "feed.js", "grid.js", "photo.js"],
+      "js": ["jquery.js", "vimstagram.js", "feed.js", "grid.js", "photo.js",
+				     "help.js"],
 			"css": ["grid.css"]
 		}
 	],
