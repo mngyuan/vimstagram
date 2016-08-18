@@ -1,9 +1,10 @@
 var mode = "feed";
 
 function setMode(newMode) {
-  $('body').removeClass(mode);
+  $('html').removeClass(mode);
   mode = newMode;
-  $('body').addClass(mode);
+  $('html').addClass(mode);
+  console.log($('html'));
 }
 
 $(document).ready(function() {
@@ -53,19 +54,19 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResp) {
   console.log(request.data.url);
   if (request.data.url.match("https?://www.instagram.com/explore/tags/.*")) {
     console.log('exploring a tag');
-    mode = "grid";
+    setMode("grid");
   } else if (request.data.url.match("https?://www.instagram.com/explore/?")) {
     console.log('explore');
-    mode = "explore";
+    setMode("explore");
   } else if (request.data.url.match("https?://www.instagram.com/p/.*")) {
     console.log('viewing a photo');
-    mode = "photo";
+    setMode("photo");
   } else if (request.data.url.match("https?://www.instagram.com/..*/?")) {
     // might be a better regex
     console.log('viewing a profile');
-    mode = "grid";
+    setMode("grid");
   } else {
     console.log('on the feed');
-    mode = "feed";
+    setMode("feed");
   }
 });
