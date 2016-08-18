@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/phorust/vimstagram/issues"
   },
-  "homepage": "https://github.com/phorust/vimstagram#readme"
+  "homepage": "https://github.com/phorust/vimstagram#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
+  }
 }
