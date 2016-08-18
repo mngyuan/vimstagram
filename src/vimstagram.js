@@ -1,5 +1,11 @@
 var mode = "feed";
 
+function setMode(newMode) {
+  $('body').removeClass(mode);
+  mode = newMode;
+  $('body').addClass(mode);
+}
+
 $(document).ready(function() {
   $('body').on('keypress', function(e) {
     switch (mode) {
